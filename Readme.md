@@ -95,7 +95,7 @@ docker-compose --version
          docker --version
       ```
          
-  #### Linux (Ubuntu 20.04+)
+  #### Linux - Ubuntu
 ```bash
    sudo apt update
    sudo apt install -y docker.io docker-compose
