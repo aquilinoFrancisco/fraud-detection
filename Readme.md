@@ -69,9 +69,9 @@ chmod +x demo.sh
 docker --version
 docker-compose --version
 ```
-   ##  Instalación de Docker ( sólo si no lo tienes instalado )
+   ###  Instalación de Docker ( sólo si no lo tienes instalado )
    
-   ###  Windows 10/11
+   ####  Windows 10/11
    
    1. Descarga Docker Desktop desde el sitio oficial:  
        https://www.docker.com/products/docker-desktop/
@@ -84,7 +84,7 @@ docker-compose --version
       ```bash
       docker --version
       
-   ###  macOS 
+   ####  macOS 
        Descarga Docker Desktop para Mac:
        https://www.docker.com/products/docker-desktop/
    
@@ -95,7 +95,7 @@ docker-compose --version
          docker --version
       ```
          
-  ### Linux (Ubuntu 20.04+)
+  #### Linux (Ubuntu 20.04+)
 ```bash
    sudo apt update
    sudo apt install -y docker.io docker-compose
