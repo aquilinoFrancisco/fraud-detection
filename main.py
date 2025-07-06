@@ -4,7 +4,6 @@ FRAUD DETECTION API - DIRECTOR LEVEL SOLUTION
 ================================================================================
 API lista para producción para puntuación de detección de fraude en tiempo real
 Desarrollada por: Aquilino Francisco
-Competición: Final Round - Data AI Director Position
 ================================================================================
 """
 
@@ -57,7 +56,7 @@ app = FastAPI(
     ### Business Impact:
     - **$20M+ annual savings** potential
     - **60%+ precision** in top 10% cases
-    - **Real-time vs 45 days** manual detection
+    - **Real-time vs  days** manual detection
     
     **Developed by:** Director de Datos AI Senior
     """,
