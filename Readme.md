@@ -21,7 +21,9 @@ cd fraud-detection
 chmod +x demo.sh
 ./demo.sh
 ```
-### WARNING : la primera vez que se instala tarda aproximandamente entre 5 y 15 minutos.
+### WARNING : la primera vez que se instala tarda aproximandamente entre 5 y 10 minutos.
+### NOTA : Debes de tener abierto el docker iniciado para que corra.
+
 **¡Listo!** Sistema funcionando en:
 - 🌐 Dashboard: http://localhost:8501
 - 📚 API Docs: http://localhost:8000/docs
