@@ -83,27 +83,29 @@ docker-compose --version
    3. Verifica instalación:
       ```bash
       docker --version
+      
    ###  macOS (Intel o Apple Silicon)
-   Descarga Docker Desktop para Mac:
-    https://www.docker.com/products/docker-desktop/
-
-   Ejecuta el .dmg, arrastra Docker a Applications, y ejecútalo
+       Descarga Docker Desktop para Mac:
+       https://www.docker.com/products/docker-desktop/
+   
+      Ejecuta el .dmg, arrastra Docker a Applications, y ejecútalo
 
    Verifica instalación:
       ```bash
          docker --version
+      ```
          
   ### Linux (Ubuntu 20.04+)
-      ```bash
+```bash
    sudo apt update
    sudo apt install -y docker.io docker-compose
    sudo systemctl enable docker
    sudo systemctl start docker
    sudo usermod -aG docker $USER
-   newgrp docker
+   newgrp docker   
    docker --version
    
-   
+   ```
    
 2. **Construir imágenes**
 ```bash
@@ -117,7 +119,7 @@ docker-compose run train
 
 4. **Iniciar servicios**
 ```bash
-docker-compose up -d
+   docker-compose up -d
 ```
 
 ## Testing
