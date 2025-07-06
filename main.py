@@ -1,6 +1,6 @@
 """
 ================================================================================
-FRAUD DETECTION API - DIRECTOR LEVEL SOLUTION
+FRAUD DETECTION API 
 ================================================================================
 API lista para producción para puntuación de detección de fraude en tiempo real
 Desarrollada por: Aquilino Francisco
