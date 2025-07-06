@@ -1,16 +1,16 @@
-# 🛡️ Sistema de detección de Fraude - Enterprise Solution
+#  Sistema de detección de Fraude - Enterprise Solution
 
-## 🎯 Resumen Ejecutivo
+##  Resumen Ejecutivo
 
 **Sistema empresarial de detección de fraude con IA** que reduce el tiempo de detección de 45 días a tiempo real, con un ROI proyectado del 844% y savings anuales de $20M+.
 
-### 📊 Métricas Clave
+###  Métricas Clave
 - **Performance**: AUC 0.847
 - **Velocidad**: <100ms por predicción
 - **Precisión**: 62.3% en top 10% de casos
 - **Compliance**: 100% decisiones explicables
 
-## 🚀 Quick Start (1 Minuto)
+##  Quick Start (1 Minuto)
 
 ```bash
 # Clonar repositorio
@@ -26,7 +26,7 @@ chmod +x demo.sh
 - 🌐 Dashboard: http://localhost:8501
 - 📚 API Docs: http://localhost:8000/docs
 
-## 🏗️ Arquitectura
+##  Arquitectura
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
@@ -53,7 +53,7 @@ chmod +x demo.sh
    - Scorecard interpretable
    - Weight of Evidence (WoE)
 
-## 📦 Instalación Manual
+##  Instalación Manual
 
 ### Prerequisitos
 - Docker 20.10+
@@ -85,7 +85,7 @@ docker-compose run train
 docker-compose up -d
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Test Rápido API
 ```bash
@@ -110,7 +110,7 @@ curl -X POST http://localhost:8000/predict \
 3. Click en "ANALYZE FRAUD RISK"
 4. Verificar score < 580 (HIGH RISK)
 
-## 📊 Endpoints Principales
+## Endpoints Principales
 
 ### Detección de Fraude
 - `POST /predict` - Análisis individual
@@ -126,7 +126,7 @@ curl -X POST http://localhost:8000/predict \
 - `GET /model/features` - Importancia de variables
 - `GET /health` - Estado del sistema
 
-## 🔧 Configuración
+##  Configuración
 
 ### Variables de Entorno
 ```bash
@@ -147,7 +147,7 @@ MODEL_PATH=/app/models
 - API: Editar `main.py`
 - Dashboard: Actualizar `app.py`
 
-## 📈 Monitoreo
+##  Monitoreo
 
 ### Logs
 ```bash
@@ -170,7 +170,7 @@ curl http://localhost:8000/health/detailed
 curl http://localhost:8000/business/metrics
 ```
 
-## 🚨 Troubleshooting
+##  Troubleshooting
 
 ### Problema: "Docker daemon not running"
 ```bash
@@ -195,7 +195,7 @@ docker stop $(docker ps -q)
 docker-compose run train
 ```
 
-## 🏆 Business Value
+##  Business Value
 
 ### ROI Proyectado
 - **Inversión**: $2.5M
@@ -209,13 +209,13 @@ docker-compose run train
 3. **Escalabilidad**: 150+ transacciones/segundo
 4. **Compliance**: 100% explicable
 
-## 📞 Soporte
+##  Soporte
 
-- **Technical Lead**: director.datos@company.com
+- **Technical Lead**: aquilino.francisco@company.com
 - **Documentation**: http://localhost:8000/docs
 - **Business Owner**: fraud.prevention@company.com
 
-## 📄 Licencia
+## Licencia
 
 Proprietary - Company Confidential
 
