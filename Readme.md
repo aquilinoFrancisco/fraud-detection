@@ -21,7 +21,7 @@ cd fraud-detection
 chmod +x demo.sh
 ./demo.sh
 ```
-### WARNING : la primera vez que se instala tarda aproximandamente entre 25 y 40 minutos.
+### WARNING : la primera vez que se instala tarda aproximandamente entre 30 y 60 minutos.
 **¡Listo!** Sistema funcionando en:
 - 🌐 Dashboard: http://localhost:8501
 - 📚 API Docs: http://localhost:8000/docs
