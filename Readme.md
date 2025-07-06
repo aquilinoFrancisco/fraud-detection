@@ -254,7 +254,7 @@ docker-compose run train
 
 ## Licencia
 
-Proprietary - Company Confidential
+Proprietario - Compañía confidencial
 
 ---
 
