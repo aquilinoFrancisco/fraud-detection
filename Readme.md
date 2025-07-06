@@ -22,8 +22,33 @@ chmod +x demo.sh
 ./demo.sh
 ```
 ### WARNING : la primera vez que se instala tarda aproximandamente entre 5 y 10 minutos.
-### NOTA : Debes de tener abierto el docker iniciado para que corra.
-
+### NOTA 1 : Debes de tener abierto el docker iniciado para que corra. 
+### NOTA 2 : Si se va a ejecutar en windows debes instalar Git bash para ejecutar el demo.sh
+   ---
+   
+   #### 📥 Descarga oficial de Git Bash
+   
+   1. Ingresa al sitio oficial:  
+      [https://git-scm.com/downloads](https://git-scm.com/downloads)
+   
+   2. Elige la versión de acuerdo con tu sistema operativo (Windows).
+   
+   3. Se descargará el instalador:  
+      **`Git-x.y.z-64-bit.exe`**
+   
+   ---
+   
+   #### Instalación paso a paso en Windows
+   
+   > **Recomendación**: Ejecutar como Administrador.
+   
+   1. Ejecuta el instalador y sigue el asistente.
+   2. Acepta la licencia y selecciona el directorio de instalación (por defecto: `C:\Program Files\Git`).
+   3. En la sección **“Choosing the default editor used by Git”**, selecciona **Visual Studio Code** (recomendado) o tu editor preferido.
+   4. En **“Adjusting your PATH environment”**, elige: Git from the command line and also from 3rd-party software
+   5. En “Choosing HTTPS transport backend”, selecciona: Use the OpenSSL library
+   6. En “Configuring the terminal emulator to use with Git Bash”, selecciona: Use MinTTY (the default terminal of MSYS2)
+      
 **¡Listo!** Sistema funcionando en:
 - 🌐 Dashboard: http://localhost:8501
 - 📚 API Docs: http://localhost:8000/docs
