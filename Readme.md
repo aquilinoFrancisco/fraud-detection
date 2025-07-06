@@ -2,7 +2,7 @@
 
 ##  Resumen Ejecutivo
 
-**Sistema empresarial de detección de fraude con IA** que reduce el tiempo de detección de 45 días a tiempo real, con un ROI proyectado del 844% y savings anuales de $20M+.
+**Sistema empresarial de detección de fraude con IA** que reduce el tiempo de detección de varios días a tiempo real, con un ROI proyectado del 844% y savings anuales de $20M+.
 
 ###  Métricas Clave
 - **Performance**: AUC 0.847
