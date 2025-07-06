@@ -69,7 +69,7 @@ chmod +x demo.sh
 docker --version
 docker-compose --version
 ```
-   ##  Instalación de Docker
+   ##  Instalación de Docker ( sólo si no lo tienes instalado )
    
    ###  Windows 10/11
    
@@ -84,7 +84,7 @@ docker-compose --version
       ```bash
       docker --version
       
-   ###  macOS (Intel o Apple Silicon)
+   ###  macOS 
        Descarga Docker Desktop para Mac:
        https://www.docker.com/products/docker-desktop/
    
