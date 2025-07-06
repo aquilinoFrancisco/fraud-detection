@@ -2,9 +2,9 @@
 ================================================================================
 FRAUD DETECTION API - DIRECTOR LEVEL SOLUTION
 ================================================================================
-Production-ready API for real-time fraud detection scoring
-Developed by: Director de Datos AI Senior
-Competition: Final Round - Data AI Director Position
+API lista para producción para puntuación de detección de fraude en tiempo real
+Desarrollada por: Aquilino Francisco
+Competición: Final Round - Data AI Director Position
 ================================================================================
 """
 
