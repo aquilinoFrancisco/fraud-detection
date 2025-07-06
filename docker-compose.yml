@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Servicio de entrenamiento - Ejecuta una vez para generar modelos
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    container_name: fraud-train
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - fraud-network
+
+  # Servicio API FastAPI
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: fraud-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro  # Read-only para seguridad
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MODELS_PATH=/app/models  # AÑADIDO: Path explícito para modelos
+    depends_on:
+      train:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    networks:
+      - fraud-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5  # MODIFICADO: Más reintentos
+      start_period: 40s  # MODIFICADO: Más tiempo de inicio
+
+  # Servicio Streamlit Frontend
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: fraud-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api:8000
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - fraud-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  fraud-network:
+    driver: bridge
+    name: fraud-detection-network
+
+volumes:
+  model-data:
+    driver: local

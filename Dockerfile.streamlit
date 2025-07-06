@@ -1,0 +1,35 @@
+# Dockerfile para Streamlit Frontend
+FROM python:3.11-slim
+
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar aplicación (modificada para usar variable de entorno)
+COPY app.py .
+
+# Crear versión modificada de app.py que use variable de entorno
+RUN sed -i 's|http://localhost:8000|${API_URL:-http://localhost:8000}|g' app.py
+
+# Puerto de Streamlit
+EXPOSE 8501
+
+# Configuración de Streamlit
+RUN mkdir -p ~/.streamlit && \
+    echo '[server]\nheadless = true\nport = 8501\n[browser]\nserverAddress = "0.0.0.0"' > ~/.streamlit/config.toml
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+
+# Comando para iniciar Streamlit
+CMD ["streamlit", "run", "app.py", "--server.address", "0.0.0.0"]

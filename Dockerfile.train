@@ -1,0 +1,25 @@
+# Dockerfile para entrenar los modelos
+FROM python:3.11-slim
+
+# Establecer directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copiar requirements primero para aprovechar cache
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar archivos necesarios
+COPY train_model.py .
+COPY data/ ./data/
+
+# Crear directorio para modelos
+RUN mkdir -p models
+
+# Comando para entrenar modelos
+CMD ["python", "train_model.py"]
