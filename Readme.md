@@ -69,7 +69,42 @@ chmod +x demo.sh
 docker --version
 docker-compose --version
 ```
+   ##  Instalación de Docker
+   
+   ###  Windows 10/11
+   
+   1. Descarga Docker Desktop desde el sitio oficial:  
+       https://www.docker.com/products/docker-desktop/
+   
+   2. Ejecuta el instalador y sigue las instrucciones:
+      - Activa la integración con WSL 2 (si usas Windows Home)
+      - Asegúrate de que Docker se inicie automáticamente al encender el sistema
+   
+   3. Verifica instalación:
+      ```bash
+      docker --version
+   ###  macOS (Intel o Apple Silicon)
+   Descarga Docker Desktop para Mac:
+    https://www.docker.com/products/docker-desktop/
 
+   Ejecuta el .dmg, arrastra Docker a Applications, y ejecútalo
+
+   Verifica instalación:
+      ```bash
+         docker --version
+         
+  ### Linux (Ubuntu 20.04+)
+      ```bash
+   sudo apt update
+   sudo apt install -y docker.io docker-compose
+   sudo systemctl enable docker
+   sudo systemctl start docker
+   sudo usermod -aG docker $USER
+   newgrp docker
+   docker --version
+   
+   
+   
 2. **Construir imágenes**
 ```bash
 docker-compose build
