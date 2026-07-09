@@ -15,7 +15,7 @@ import xgboost as xgb
 import warnings
 warnings.filterwarnings('ignore')
 
-print("🚀 INICIANDO ENTRENAMIENTO DE MODELOS DE FRAUD DETECTION")
+print(" INICIANDO ENTRENAMIENTO DE MODELOS DE FRAUD DETECTION")
 print("=" * 60)
 
 # Crear directorio para modelos si no existe
@@ -24,15 +24,15 @@ os.makedirs('models', exist_ok=True)
 # ============================================================================
 # 1. CARGA DE DATOS
 # ============================================================================
-print("\n📊 PASO 1: CARGA DE DATOS")
+print(" PASO 1: CARGA DE DATOS")
 print("-" * 40)
 
 try:
     df = pd.read_csv('data/fraud_train.csv')
-    print(f"✅ Dataset cargado: {df.shape[0]:,} filas × {df.shape[1]} columnas")
-    print(f"📈 Fraud Rate: {df['FraudFound_P'].mean():.1%}")
+    print(f" Dataset cargado: {df.shape[0]:,} filas × {df.shape[1]} columnas")
+    print(f" Fraud Rate: {df['FraudFound_P'].mean():.1%}")
 except FileNotFoundError:
-    print("⚠️ Generando datos sintéticos...")
+    print(" Generando datos sintéticos...")
     np.random.seed(42)
     n_samples = 5000
     
@@ -58,7 +58,7 @@ except FileNotFoundError:
     fraud_probability = np.clip(fraud_probability, 0, 0.25)
     
     df['FraudFound_P'] = np.random.binomial(1, fraud_probability)
-    print(f"✅ Dataset sintético creado: {df.shape}")
+    print(f" Dataset sintético creado: {df.shape}")
 
 # ============================================================================
 # 2. FEATURE ENGINEERING
@@ -100,14 +100,14 @@ df['Young_Driver'] = df.get('AgeOfPolicyHolder', '').isin(['18 to 20', '21 to 25
 df['Complex_Policy'] = df.get('PolicyType', '').str.contains('All Perils', na=False).astype(int)
 df['Premium_Make'] = df.get('Make', '').isin(['BMW', 'Mercedes', 'Audi']).astype(int)
 
-print("✅ Feature engineering completado")
+print(" Feature engineering completado")
 print(f"   • Variables numéricas creadas: 4")
 print(f"   • Variables de negocio creadas: 5")
 
 # ============================================================================
 # 3. WEIGHT OF EVIDENCE
 # ============================================================================
-print("\n📊 PASO 3: CÁLCULO DE WEIGHT OF EVIDENCE")
+print(" PASO 3: CÁLCULO DE WEIGHT OF EVIDENCE")
 print("-" * 40)
 
 def calculate_woe(df, feature, target):
@@ -159,14 +159,14 @@ for var in categorical_vars:
             woe_mappings[var] = woe_dict
             iv_values[var] = iv
             df[f'{var}_WoE'] = df[var].map(woe_dict).fillna(0)
-            print(f"✅ {var}: IV = {iv:.3f}")
+            print(f" {var}: IV = {iv:.3f}")
 
-print(f"\n📈 Variables WoE creadas: {len(woe_mappings)}")
+print(f"Variables WoE creadas: {len(woe_mappings)}")
 
 # ============================================================================
 # 4. PREPARACIÓN DE DATOS PARA MODELADO
 # ============================================================================
-print("\n🎯 PASO 4: PREPARACIÓN PARA MODELADO")
+print(" PASO 4: PREPARACIÓN PARA MODELADO")
 print("-" * 40)
 
 # Seleccionar features
@@ -180,7 +180,7 @@ feature_cols = [col for col in feature_cols if col in df.columns]
 X = df[feature_cols].fillna(0)
 y = df['FraudFound_P']
 
-print(f"📊 Features seleccionadas: {len(feature_cols)}")
+print(f" Features seleccionadas: {len(feature_cols)}")
 
 # Split de datos
 X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.15, stratify=y, random_state=42)
@@ -190,19 +190,19 @@ X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.17
 try:
     smote = SMOTE(random_state=42, sampling_strategy=0.1)
     X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
-    print(f"✅ Balanceo SMOTE aplicado: {y_train_balanced.mean():.1%} fraude")
+    print(f"Balanceo SMOTE aplicado: {y_train_balanced.mean():.1%} fraude")
 except:
     X_train_balanced, y_train_balanced = X_train, y_train
-    print("⚠️ SMOTE no disponible, usando datos originales")
+    print("SMOTE no disponible, usando datos originales")
 
 # ============================================================================
 # 5. ENTRENAMIENTO DE MODELOS
 # ============================================================================
-print("\n🤖 PASO 5: ENTRENAMIENTO DE MODELOS")
+print("PASO 5: ENTRENAMIENTO DE MODELOS")
 print("-" * 40)
 
 # Modelo 1: Regresión Logística
-print("\n📊 Entrenando Regresión Logística...")
+print("Entrenando Regresión Logística...")
 logistic_model = LogisticRegression(
     random_state=42,
     max_iter=1000,
@@ -216,10 +216,10 @@ logistic_model.fit(X_train_balanced, y_train_balanced)
 # Evaluación
 y_pred_val = logistic_model.predict_proba(X_val)[:, 1]
 auc_logistic = roc_auc_score(y_val, y_pred_val)
-print(f"✅ Logistic Regression - AUC: {auc_logistic:.3f}")
+print(f"Logistic Regression - AUC: {auc_logistic:.3f}")
 
 # Modelo 2: XGBoost
-print("\n🚀 Entrenando XGBoost...")
+print("Entrenando XGBoost...")
 xgb_params = {
     'objective': 'binary:logistic',
     'max_depth': 4,
@@ -234,12 +234,12 @@ xgb_model.fit(X_train_balanced, y_train_balanced,
 
 y_pred_val_xgb = xgb_model.predict_proba(X_val)[:, 1]
 auc_xgb = roc_auc_score(y_val, y_pred_val_xgb)
-print(f"✅ XGBoost - AUC: {auc_xgb:.3f}")
+print(f"XGBoost - AUC: {auc_xgb:.3f}")
 
 # ============================================================================
 # 6. GENERACIÓN DE SCORECARD
 # ============================================================================
-print("\n📋 PASO 6: GENERACIÓN DE SCORECARD")
+print("PASO 6: GENERACIÓN DE SCORECARD")
 print("-" * 40)
 
 base_score = 650
@@ -270,28 +270,28 @@ scorecard_dict = {
     }
 }
 
-print(f"✅ Scorecard generada con {len(scorecard)} variables")
+print(f"Scorecard generada con {len(scorecard)} variables")
 print(f"   Base Score: {base_score}")
 print(f"   Base Points: {base_points:.0f}")
 
 # ============================================================================
 # 7. EXPORTACIÓN DE MODELOS
 # ============================================================================
-print("\n💾 PASO 7: EXPORTANDO MODELOS")
+print("PASO 7: EXPORTANDO MODELOS")
 print("-" * 40)
 
 # Guardar modelos
 joblib.dump(logistic_model, 'models/logistic_model.pkl')
-print("✅ models/logistic_model.pkl")
+print("models/logistic_model.pkl")
 
 joblib.dump(xgb_model, 'models/xgb_model.pkl')
-print("✅ models/xgb_model.pkl")
+print("models/xgb_model.pkl")
 
 joblib.dump(woe_mappings, 'models/woe_mappings.pkl')
-print("✅ models/woe_mappings.pkl")
+print("models/woe_mappings.pkl")
 
 joblib.dump(scorecard_dict, 'models/scorecard.pkl')
-print("✅ models/scorecard.pkl")
+print("models/scorecard.pkl")
 
 # Guardar metadata
 metadata = {
@@ -302,11 +302,11 @@ metadata = {
     'training_date': pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
 }
 joblib.dump(metadata, 'models/metadata.pkl')
-print("✅ models/metadata.pkl")
+print("models/metadata.pkl")
 
 print("\n" + "=" * 60)
-print("✅ ENTRENAMIENTO COMPLETADO EXITOSAMENTE")
+print("ENTRENAMIENTO COMPLETADO EXITOSAMENTE")
 print("=" * 60)
-print(f"📊 Modelos exportados: 5 archivos")
-print(f"📈 Performance: Logistic={auc_logistic:.3f}, XGBoost={auc_xgb:.3f}")
-print(f"🚀 Sistema listo para producción")
+print(f"Modelos exportados: 5 archivos")
+print(f"Performance: Logistic={auc_logistic:.3f}, XGBoost={auc_xgb:.3f}")
+print(f"Sistema listo para producción")
